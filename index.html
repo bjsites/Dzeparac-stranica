@@ -1,0 +1,1553 @@
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Džeparac — Moj mali novčanik."
+    >
+
+    <title>Džeparac — Moj mali novčanik</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --primary: #4F8EF7;
+            --primary-dark: #2F6ED8;
+            --primary-light: #EEF5FF;
+
+            --text: #101828;
+            --muted: #667085;
+
+            --white: #FFFFFF;
+
+            --green: #42C66A;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(79, 142, 247, 0.20),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(93, 194, 255, 0.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #F8FBFF,
+                    #EAF3FF
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           BACKGROUND
+        ===================================================== */
+
+        .background {
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        .blob {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(75px);
+
+            opacity: 0.45;
+
+            animation:
+                floating 8s ease-in-out infinite;
+        }
+
+
+        .blob-one {
+            width: 330px;
+            height: 330px;
+
+            left: -130px;
+            top: -100px;
+
+            background: #8BB8FF;
+        }
+
+
+        .blob-two {
+            width: 360px;
+            height: 360px;
+
+            right: -130px;
+            top: 20%;
+
+            background: #B8E4FF;
+
+            animation-delay: -3s;
+        }
+
+
+        .blob-three {
+            width: 280px;
+            height: 280px;
+
+            left: 35%;
+            bottom: -150px;
+
+            background: #9DB9FF;
+
+            animation-delay: -5s;
+        }
+
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(25px, -20px);
+            }
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            width: min(
+                1180px,
+                calc(100% - 40px)
+            );
+
+            margin: auto;
+
+            padding: 25px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.6px;
+        }
+
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 14px;
+
+            color: white;
+
+            font-size: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(47, 110, 216, 0.25);
+        }
+
+
+        .header-badge {
+            padding: 9px 15px;
+
+            border-radius: 999px;
+
+            color: var(--primary-dark);
+
+            background:
+                rgba(255, 255, 255, 0.70);
+
+            border:
+                1px solid
+                rgba(79, 142, 247, 0.12);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            backdrop-filter: blur(10px);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            width: min(
+                1180px,
+                calc(100% - 40px)
+            );
+
+            min-height:
+                calc(100vh - 100px);
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                420px;
+
+            align-items: center;
+
+            gap: 80px;
+
+            padding:
+                45px 0 90px;
+        }
+
+
+        .hero-content {
+            animation:
+                hero-appear 0.8s ease both;
+        }
+
+
+        @keyframes hero-appear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           BADGE
+        ===================================================== */
+
+        .small-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 9px 14px;
+
+            margin-bottom: 22px;
+
+            border-radius: 999px;
+
+            color: var(--primary-dark);
+
+            background:
+                rgba(79, 142, 247, 0.10);
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .small-label-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 0 5px
+                rgba(66, 198, 106, 0.12);
+        }
+
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        h1 {
+            max-width: 700px;
+
+            margin-bottom: 25px;
+
+            font-size:
+                clamp(
+                    50px,
+                    7vw,
+                    82px
+                );
+
+            line-height: 0.95;
+
+            letter-spacing: -4px;
+
+            font-weight: 800;
+        }
+
+
+        h1 span {
+            color: var(--primary);
+        }
+
+
+        /* =====================================================
+           TEXT
+        ===================================================== */
+
+        .hero-text {
+            max-width: 570px;
+
+            margin-bottom: 35px;
+
+            color: var(--muted);
+
+            font-size: 19px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .buttons {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .install-button {
+            position: relative;
+
+            overflow: hidden;
+
+            border: none;
+
+            border-radius: 15px;
+
+            padding:
+                17px 25px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            cursor: pointer;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+
+            box-shadow:
+                0 15px 30px
+                rgba(47, 110, 216, 0.28);
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .install-button:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 20px 40px
+                rgba(47, 110, 216, 0.34);
+        }
+
+
+        .install-button:active {
+            transform:
+                translateY(0);
+        }
+
+
+        .install-button::after {
+            content: "";
+
+            position: absolute;
+
+            width: 70px;
+            height: 200px;
+
+            left: -100px;
+            top: -50px;
+
+            background:
+                rgba(255, 255, 255, 0.22);
+
+            transform:
+                rotate(25deg);
+
+            transition:
+                left 0.5s ease;
+        }
+
+
+        .install-button:hover::after {
+            left: 130%;
+        }
+
+
+        .preview-button {
+            padding:
+                16px 20px;
+
+            border:
+                1px solid
+                rgba(16, 24, 40, 0.08);
+
+            border-radius: 15px;
+
+            color: var(--text);
+
+            background:
+                rgba(255, 255, 255, 0.65);
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            backdrop-filter:
+                blur(10px);
+
+            transition:
+                0.2s ease;
+        }
+
+
+        .preview-button:hover {
+            background: white;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+            margin-top: 45px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: #667085;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .feature-icon {
+            width: 31px;
+            height: 31px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 9px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 15px
+                rgba(16, 24, 40, 0.06);
+        }
+
+
+        /* =====================================================
+           PHONE
+        ===================================================== */
+
+        .phone-area {
+            display: flex;
+
+            justify-content: center;
+
+            animation:
+                phone-appear
+                1s
+                0.15s
+                ease
+                both;
+        }
+
+
+        @keyframes phone-appear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    rotate(4deg);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    rotate(0);
+            }
+        }
+
+
+        .phone {
+            position: relative;
+
+            width: 280px;
+            height: 570px;
+
+            padding: 9px;
+
+            border-radius: 40px;
+
+            background: #101828;
+
+            box-shadow:
+                0 35px 80px
+                rgba(16, 24, 40, 0.28);
+
+            transform:
+                rotate(2deg);
+
+            transition:
+                transform 0.4s ease;
+        }
+
+
+        .phone:hover {
+            transform:
+                rotate(0)
+                translateY(-8px);
+        }
+
+
+        /* =====================================================
+           PHONE NOTCH
+        ===================================================== */
+
+        .phone-notch {
+            position: absolute;
+
+            z-index: 5;
+
+            top: 9px;
+
+            left: 50%;
+
+            width: 95px;
+            height: 25px;
+
+            transform:
+                translateX(-50%);
+
+            border-radius:
+                0 0 16px 16px;
+
+            background: #101828;
+        }
+
+
+        /* =====================================================
+           PHONE SCREEN
+        ===================================================== */
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            border-radius: 32px;
+
+            background: #F5F8FD;
+        }
+
+
+        .app-image {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(16, 24, 40, 0.48);
+
+            backdrop-filter:
+                blur(8px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+
+        .modal.active {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .modal-box {
+            width:
+                min(430px, 100%);
+
+            padding: 32px;
+
+            border-radius: 26px;
+
+            text-align: center;
+
+            background: white;
+
+            box-shadow:
+                0 30px 80px
+                rgba(16, 24, 40, 0.25);
+
+            transform:
+                translateY(15px)
+                scale(0.97);
+
+            transition:
+                transform 0.25s ease;
+        }
+
+
+        .modal.active .modal-box {
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        .modal-icon {
+            width: 65px;
+            height: 65px;
+
+            margin:
+                0 auto 18px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 20px;
+
+            color: white;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+        }
+
+
+        .modal-box h2 {
+            margin-bottom: 10px;
+
+            font-size: 24px;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .modal-box p {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        .modal-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .modal-button {
+            flex: 1;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .close-button {
+            color: #344054;
+
+            background: #F2F4F7;
+        }
+
+
+        .download-button {
+            color: white;
+
+            background:
+                var(--primary);
+        }
+
+
+        .download-button:hover {
+            background:
+                var(--primary-dark);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            width:
+                min(
+                    1180px,
+                    calc(100% - 40px)
+                );
+
+            margin: auto;
+
+            padding:
+                25px 0 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            color: #98A2B3;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                gap: 55px;
+
+                text-align: center;
+            }
+
+
+            .hero-content {
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .hero-text {
+                font-size: 17px;
+            }
+
+
+            .buttons {
+                justify-content: center;
+            }
+
+
+            .features {
+                justify-content: center;
+            }
+
+
+            .phone {
+                width: 250px;
+                height: 510px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+                width:
+                    calc(100% - 28px);
+
+                padding-top: 18px;
+            }
+
+
+            .header-badge {
+                display: none;
+            }
+
+
+            .logo {
+                font-size: 20px;
+            }
+
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+
+            .hero {
+                width:
+                    calc(100% - 28px);
+
+                padding-top: 25px;
+
+                padding-bottom: 65px;
+            }
+
+
+            h1 {
+                font-size: 52px;
+
+                letter-spacing: -3px;
+            }
+
+
+            .hero-text {
+                font-size: 16px;
+
+                line-height: 1.65;
+            }
+
+
+            .buttons {
+                width: 100%;
+
+                flex-direction: column;
+            }
+
+
+            .install-button,
+            .preview-button {
+                width: 100%;
+            }
+
+
+            .features {
+                flex-direction: column;
+
+                gap: 13px;
+            }
+
+
+            .phone {
+                width: 235px;
+                height: 480px;
+            }
+
+
+            footer {
+                width:
+                    calc(100% - 28px);
+
+                flex-direction: column;
+
+                gap: 10px;
+
+                text-align: center;
+            }
+
+
+            .modal-box {
+                padding: 25px;
+            }
+
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         POZADINA
+    ===================================================== -->
+
+    <div class="background">
+
+        <div class="blob blob-one"></div>
+
+        <div class="blob blob-two"></div>
+
+        <div class="blob blob-three"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ₿
+            </div>
+
+            <span>
+                Džeparac
+            </span>
+
+        </div>
+
+
+        <div class="header-badge">
+            Android aplikacija
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         GLAVNI SADRŽAJ
+    ===================================================== -->
+
+    <main class="hero">
+
+
+        <!-- =================================================
+             LIJEVA STRANA
+        ================================================= -->
+
+        <section class="hero-content">
+
+
+            <div class="small-label">
+
+                <span class="small-label-dot"></span>
+
+                Tvoj novac, pod tvojom kontrolom
+
+            </div>
+
+
+            <h1>
+
+                Tvoj mali
+
+                <span>
+                    novčanik.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-text">
+
+                Džeparac je jednostavna aplikacija za
+                praćenje novca. Dodaj novac, prati troškove
+                i uvijek znaj koliko imaš.
+
+            </p>
+
+
+            <div class="buttons">
+
+
+                <button
+                    type="button"
+                    class="install-button"
+                    id="installButton"
+                >
+
+                    <span>
+                        ↓
+                    </span>
+
+                    Instaliraj Džeparac
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="preview-button"
+                    id="previewButton"
+                >
+
+                    Pogledaj aplikaciju
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PREDNOSTI
+            ================================================= -->
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ✓
+                    </div>
+
+                    Jednostavno
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    Brzo
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    Privatno
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PRIKAZ APLIKACIJE
+        ================================================= -->
+
+        <section
+            class="phone-area"
+            id="preview"
+        >
+
+
+            <div class="phone">
+
+
+                <div class="phone-notch"></div>
+
+
+                <div class="phone-screen">
+
+
+                    <img
+                        src="izgled.jpg"
+                        alt="Izgled Džeparac aplikacije"
+                        class="app-image"
+                    >
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <span>
+            © 2026 Džeparac
+        </span>
+
+
+        <span>
+            Moj mali novčanik.
+        </span>
+
+    </footer>
+
+
+    <!-- =====================================================
+         INSTALL MODAL
+    ===================================================== -->
+
+    <div
+        class="modal"
+        id="installModal"
+    >
+
+
+        <div class="modal-box">
+
+
+            <div class="modal-icon">
+                ↓
+            </div>
+
+
+            <h2>
+                Instaliraj Džeparac
+            </h2>
+
+
+            <p>
+
+                Preuzmi Android aplikaciju i instaliraj
+                je na svoj telefon.
+
+            </p>
+
+
+            <div class="modal-buttons">
+
+
+                <button
+                    type="button"
+                    class="modal-button close-button"
+                    id="closeModal"
+                >
+
+                    Zatvori
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modal-button download-button"
+                    id="downloadButton"
+                >
+
+                    Preuzmi APK
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           ELEMENTI
+        ===================================================== */
+
+        const installButton =
+            document.getElementById(
+                "installButton"
+            );
+
+
+        const previewButton =
+            document.getElementById(
+                "previewButton"
+            );
+
+
+        const installModal =
+            document.getElementById(
+                "installModal"
+            );
+
+
+        const closeModal =
+            document.getElementById(
+                "closeModal"
+            );
+
+
+        const downloadButton =
+            document.getElementById(
+                "downloadButton"
+            );
+
+
+        /* =====================================================
+           OTVARANJE MODALA
+        ===================================================== */
+
+        installButton.addEventListener(
+            "click",
+            () => {
+
+                installModal.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           ZATVARANJE MODALA
+        ===================================================== */
+
+        closeModal.addEventListener(
+            "click",
+            () => {
+
+                installModal.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           KLIK IZVAN MODALA
+        ===================================================== */
+
+        installModal.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    event.target === installModal
+                ) {
+
+                    installModal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           ESC TIPKA
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    installModal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           POGLEDAJ APLIKACIJU
+        ===================================================== */
+
+        previewButton.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .getElementById("preview")
+                    .scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+            }
+        );
+
+
+        /* =====================================================
+           PREUZIMANJE APK-a
+        ===================================================== */
+
+        downloadButton.addEventListener(
+            "click",
+            () => {
+
+                /*
+                    Kada budeš imao APK,
+                    stavi ga u isti folder kao index.html
+                    i nazovi ga:
+
+                    Dzeparac.apk
+
+                    Tada će ovaj gumb automatski
+                    pokrenuti preuzimanje.
+                */
+
+
+                const apkLink =
+                    document.createElement("a");
+
+
+                apkLink.href =
+                    "Dzeparac.apk";
+
+
+                apkLink.download =
+                    "Dzeparac.apk";
+
+
+                document.body.appendChild(
+                    apkLink
+                );
+
+
+                apkLink.click();
+
+
+                apkLink.remove();
+
+            }
+        );
+
+
+        /* =====================================================
+           UČITAVANJE STRANICE
+        ===================================================== */
+
+        window.addEventListener(
+            "load",
+            () => {
+
+                console.log(
+                    "Džeparac instalacijska stranica učitana."
+                );
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+</html>
+
